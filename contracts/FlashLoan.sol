@@ -19,10 +19,8 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
         address initiator,
         bytes calldata params
     ) external override returns (bool) {
-        // here we have funds already
 
-
-        //AD CUSTOM LOGIC
+        // Funds rdy, add arb logic or smth else
 
     uint256 amountOwed = amount + premium;
     IERC20(asset).approve(address(POOL), amountOwed);
@@ -37,7 +35,6 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
     uint256 amount = _amount;
     bytes memory params = "";
     uint16 referalCode = 0;
-
 
     POOL.flashLoanSimple(
         receiverAddress,
@@ -60,7 +57,7 @@ contract FlashLoan is FlashLoanSimpleReceiverBase {
     }
  
  modifier onlyOwner {
-    require(msg.sender == owner, "Only contract owner can call this function");
+    require(msg.sender == owner, "Not contract owner");
     _;
  }
 
